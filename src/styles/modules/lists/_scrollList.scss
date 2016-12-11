@@ -1,0 +1,20 @@
+.m-scroll-list {
+  padding: 0;
+  max-height: 500px;
+  background-color: white;
+  @include shadow-2dp();
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+
+.m-scroll-list__title-wrapper {
+  background-color: $color-theme-accent;
+  padding: 12px;
+  @include shadow-2dp();
+}
+
+.m-scroll-list__title {
+  @extend %typo-title;
+  color: white;
+  margin: 0;
+}
