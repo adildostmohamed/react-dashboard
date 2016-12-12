@@ -39,7 +39,7 @@
   position: relative;
   line-height: calc(#{$header-height--skinny} - 16px);
   &:hover, &:focus {
-    background-color: rgba(0,0,0, 0.07);
+    background-color: rgba(0,0,0, 0.03);
     text-decoration: none;
     color: $color-text-links;
   }

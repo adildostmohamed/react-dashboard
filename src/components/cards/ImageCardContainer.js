@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import base from 'config/rebase';
 
-import ContentCard from 'components/cards/ContentCard';
+import ImageCard from 'components/cards/ImageCard';
 
-class ContentCardContainer extends Component {
+class ImageCardContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      contentCard: {}
+      imageCard: {}
     }
   }
   componentDidMount(){
     this.firebaseRef = base.syncState(`components/${this.props.id}`,{
       context: this,
-      state: 'contentCard'
+      state: 'imageCard'
     });
   }
   componentWillUnmount() {
@@ -22,9 +22,9 @@ class ContentCardContainer extends Component {
   }
   render() {
     return (
-      <ContentCard content={this.state.contentCard} />
+      <ImageCard content={this.state.imageCard} />
     )
   }
 }
 
-export default ContentCardContainer;
+export default ImageCardContainer;

@@ -6,7 +6,7 @@
 %card {
   width: 100%;
   @include shadow-2dp();
-  padding: 24px;
+  background-color: white;
   border-radius: 3px;
   margin-bottom: 24px;
 }
@@ -21,20 +21,32 @@
   @extend %card;
 }
 
+.m-card__image {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.m-card__content-wrapper {
+  padding: 18px;
+}
+
 .m-card__title {
   @extend %typo-headline;
-  margin-top: 0;
-  margin-bottom: 8px;
+  margin: 0;
   color: $color-text-dark;
 }
 
 .m-card__subtitle {
   @extend %typo-body-2;
+  margin: 0;
   color: $color-text-light;
 }
 
-.m-card__text {
+.m-card__body {
   @extend %typo-body-1;
+  margin: 12px 0;
   color: $color-text-normal;
 }
 
@@ -44,12 +56,14 @@
 
 .m-card__action {
   @extend %typo-button;
+  position: relative;
+  right: 8px;
   padding: 8px;
   border-radius: 2px;
   transition: all 0.3s;
   color: $color-text-links;
   &:hover, &:focus {
-    background-color: rgba(0,0,0, 0.07);
+    background-color: rgba(0,0,0, 0.03);
     text-decoration: none;
     color: $color-text-links;
   }
