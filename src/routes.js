@@ -16,8 +16,6 @@ const createRoutes = () => {
   AppData.pages.forEach((page)=>{
     routes.push(<Route path={page.pathName} component={PageContainer} key={page.id} id={page.id}/>)
   });
-  //return the routes array
-  return routes;
 }
 
 //create a routes variable that holds the routing configuration passing in the createRoutes which returns the array of routes that were created

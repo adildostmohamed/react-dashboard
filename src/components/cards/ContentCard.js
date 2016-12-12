@@ -6,6 +6,7 @@ import { renderCardTitle, renderCardSubtitle, renderCardBody, renderCardActions 
 class ContentCard extends Component {
   render() {
     const { content } = this.props;
+    //create a variable to hold the content card markup so that you can use a ternary statement to render a loading indicator before the card content has loaded
     const contentCard = (
       <div className="m-card">
         <div className="m-card__content-wrapper">

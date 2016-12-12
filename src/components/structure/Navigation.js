@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import AppData from 'mocks/AppData';
-
 export default class Navigation extends Component {
   constructor(props) {
     super(props);
@@ -10,15 +8,23 @@ export default class Navigation extends Component {
     this.renderNavItems = this.renderNavItems.bind(this);
   }
 
+
+  //function to render the navigation items from the navItems state on the component
   renderNavItems() {
-    const pages = AppData.pages;
-    return pages.map((page)=>{
-      return(
-        <li className="m-nav__list-item" key={page.id}>
-          <Link to={page.pathName} className="m-nav__list-link" activeClassName="m-nav__list-link--active">{page.displayName}</Link>
-        </li>
-      )
-    })
+    if(this.props.appConfig && this.props.appConfig.hasOwnProperty("pagesConfig")) {
+      const pagesConfig = this.props.appConfig.pagesConfig;
+      const pageIds = Object.keys(pagesConfig);
+
+      return pageIds.map((pageId) => {
+        const page = pagesConfig[pageId];
+        return (
+          <li className="m-nav__list-item" key={page.id}>
+            <Link to={page.pathName} className="m-nav__list-link" activeClassName="m-nav__list-link--active">{page.displayName}</Link>
+          </li>
+        )
+      });
+    }
+    return null;
   }
 
   render() {
