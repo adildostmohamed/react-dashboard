@@ -31,17 +31,13 @@ import PageContainer from 'components/structure/PageContainer';
   //call the getUserAppConfig and then once it is resolved, bootstrap the application using the data
   getUserAppConfig().then((data) => {
     //set appConfig to the data from the promise
-    const appConfig = data;
-
-    //create an array of pageIds from the appConfig
-    const pageIds = Object.keys(appConfig.pagesConfig);
+    const pages = data.appConfig.pagesConfig;
 
     //create an empty array to hold the routes from the appconfig
     const routes = [];
 
     //loop over each pageId and for each of them, find the page object it refers to and add the config of that route to the routes array
-    pageIds.forEach((pageId) => {
-      const page = appConfig.pagesConfig[pageId];
+    pages.forEach((page) => {
       routes.push(
         <Route path={page.pathName} component={PageContainer} key={page.id} id={page.id}/>
       )

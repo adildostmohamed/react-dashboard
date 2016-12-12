@@ -12,11 +12,9 @@ export default class Navigation extends Component {
   //function to render the navigation items from the navItems state on the component
   renderNavItems() {
     if(this.props.appConfig && this.props.appConfig.hasOwnProperty("pagesConfig")) {
-      const pagesConfig = this.props.appConfig.pagesConfig;
-      const pageIds = Object.keys(pagesConfig);
+      const pages = this.props.appConfig.pagesConfig;
 
-      return pageIds.map((pageId) => {
-        const page = pagesConfig[pageId];
+      return pages.map((page) => {
         return (
           <li className="m-nav__list-item" key={page.id}>
             <Link to={page.pathName} className="m-nav__list-link" activeClassName="m-nav__list-link--active">{page.displayName}</Link>

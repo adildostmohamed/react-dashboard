@@ -13,7 +13,7 @@ var database = firebase.database();
 
 //a function which returns a promise holding the value of the appConfig object
 export function getUserAppConfig() {
-  return database.ref('/appConfig').once('value').then((snapshot) => {
+  return database.ref('/').once('value').then((snapshot) => {
     return snapshot.val();
   });
 };

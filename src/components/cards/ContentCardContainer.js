@@ -12,7 +12,7 @@ class ContentCardContainer extends Component {
     }
   }
   componentDidMount(){
-    this.firebaseRef = base.syncState(`components/${this.props.id}`,{
+    this.firebaseRef = base.syncState(`componentsData/0`,{
       context: this,
       state: 'contentCard'
     });
