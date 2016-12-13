@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ContentCardManage extends Component {
+class ImageCardManage extends Component {
   constructor(props) {
     super(props);
 
@@ -10,16 +10,17 @@ class ContentCardManage extends Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    const updatedContentCard = {
+    const updatedImageCard = {
       title: this.title.value,
       subtitle: this.subtitle.value,
       body: this.body.value,
-      actions: [
-        { label: this.action1Label.value, target: this.action1Target.value }
-      ]
+      image: {
+        src: this.imageSrc.value,
+        alt: this.imageAlt.value
+      }
     }
 
-    this.props.updateContentCard(updatedContentCard);
+    this.props.updateImageCard(updatedImageCard);
     this.manageCardForm.reset();
   }
   renderManageCardForm() {
@@ -42,16 +43,16 @@ class ContentCardManage extends Component {
             <span className="c-textarea__border"></span>
           </div>
           <div>
-            <label htmlFor="action1Label" className="c-label">Action 1 Label</label>
-            <input id="action1Label" className="c-input" defaultValue={this.props.content.actions[0].label} type="text" ref={ (input => this.action1Label = input) } />
+            <label htmlFor="imageSrc" className="c-label">Image source</label>
+            <input id="imageSrc" className="c-input" defaultValue={this.props.content.image.src} type="url" ref={ (input => this.imageSrc = input) } />
             <span className="c-input__border"></span>
           </div>
           <div>
-            <label htmlFor="action1Target" className="c-label">Action 1 Target</label>
-            <input id="action1Target" className="c-input" defaultValue={this.props.content.actions[0].target} type="url" ref={ (input => this.action1Target = input) } />
+            <label htmlFor="imageAlt" className="c-label">Image alt tag</label>
+            <input id="imageAlt" className="c-input" defaultValue={this.props.content.image.alt} type="text" ref={ (input => this.imageAlt = input) } />
             <span className="c-input__border"></span>
           </div>
-          <button type="submit">Update</button>
+          <button className="c-btn-primary" type="submit">Update</button>
         </form>
       )
     }
@@ -68,4 +69,4 @@ class ContentCardManage extends Component {
   }
 }
 
-export default ContentCardManage;
+export default ImageCardManage;

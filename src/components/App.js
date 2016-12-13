@@ -11,9 +11,9 @@ class App extends Component {
     this.props.getAppConfig();
   }
   render() {
-    if(Object.keys(this.props.user).length === 0) {
-      return <Login />
-    }
+    // if(Object.keys(this.props.user).length === 0) {
+    //   return <Login />
+    // }
     return (
       <div>
         <header className="m-header">
@@ -23,7 +23,6 @@ class App extends Component {
           <Navigation appConfig={this.props.appConfig}/>
         </header>
         <main id="main" className="main">
-          <h1>hello world</h1>
           { this.props.children }
         </main>
       </div>

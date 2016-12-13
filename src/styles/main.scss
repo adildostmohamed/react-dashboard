@@ -9,7 +9,7 @@
 
 label {
   display: block;
-  margin-top: 12px;
+  margin: 18px 0 0 0;
 }
 
 .c-label {
@@ -18,14 +18,19 @@ label {
 
 .c-input {
   @extend %typo-body-1;
-  box-sizing: border-box;
-  -webkit-box-sizing:border-box;
-  display: block;
   background-color: transparent;
   outline: none;
   border: none;
   width: 100%;
-  height: 48px;
+  height: 36px;
+  border-bottom: 1px solid rgba(black, 0.1);
+  transition: 0.2s ease all;
+  &:hover {
+    border-bottom: 1px solid rgba(black, 0.25);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
 }
 
 .c-input__border {
@@ -57,13 +62,18 @@ label {
 
 .c-textarea {
   @extend %typo-body-1;
-  box-sizing: border-box;
-  -webkit-box-sizing:border-box;
-  display: block;
   background-color: transparent;
   outline: none;
   border: none;
   width: 100%;
+  border-bottom: 1px solid rgba(black, 0.1);
+  transition: 0.2s ease all;
+  &:hover {
+    border-bottom: 1px solid rgba(black, 0.25);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
 }
 
 .c-textarea__border {
@@ -91,4 +101,14 @@ label {
 /* active state */
 .c-textarea:focus ~ .c-textarea__border:before, .c-textarea:focus ~ .c-textarea__border:after {
   width:50%;
+}
+
+.c-btn-primary {
+  @extend %typo-button;
+  margin-top: 24px;
+  background-color: $color-theme-accent;
+  padding: 10px 18px;
+  outline: none;
+  border: none;
+  transition: all 0.3s;
 }
