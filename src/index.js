@@ -49,7 +49,7 @@ import ManageComponentContainer from 'components/structure/ManageComponentContai
     const routesToBootstrap = (
       <Provider store={store}>
         <Router history={browserHistory} >
-          <Route path="/" component={App}>
+          <Route component={App}>
             {routes}
             <Route path="manage" component={ManageComponentsListContainer} />
             <Route path="manage/:id" component={ManageComponentContainer} />
