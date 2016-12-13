@@ -1,0 +1,16 @@
+.p-login {
+  background-color: $color-theme-primary;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-login__button {
+  background-color: $color-theme-accent;
+  border: none;
+  outline: none;
+  @extend %typo-button;
+  color: $color-theme-primary;
+  padding: 12px 24px;
+}

@@ -12,8 +12,14 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 //a function which returns a promise holding the value of the appConfig object
-export function getUserAppConfig() {
-  return database.ref('/').once('value').then((snapshot) => {
+export function getAppConfigFromFirebase() {
+  return database.ref('/appConfig').once('value').then((snapshot) => {
     return snapshot.val();
   });
+};
+
+export function getComponentsConfigFromFirebase() {
+  return database.ref('/componentsConfig').once('value').then((snapshot) => {
+    return snapshot.val();
+  })
 };

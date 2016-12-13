@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import base from 'config/rebase';
 
-import ContentCard from 'components/cards/ContentCard';
+import ContentCard from 'components/cards/contentCards/ContentCard';
 
 class ContentCardContainer extends Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class ContentCardContainer extends Component {
     }
   }
   componentDidMount(){
-    this.firebaseRef = base.syncState(`componentsData/0`,{
+    this.firebaseRef = base.syncState(`componentsData/${this.props.config.dataId}`,{
       context: this,
       state: 'contentCard'
     });

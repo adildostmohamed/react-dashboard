@@ -19,19 +19,21 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 //import firebase call to return app config
-import { getUserAppConfig } from 'mocks/AppConfig';
+import { getAppConfigFromFirebase } from 'mocks/AppConfig';
 
 //import app components required for rendering
 import App from 'components/App';
-import PageContainer from 'components/structure/PageContainer';
+import RouteDisplayContainer from 'components/structure/RouteDisplayContainer';
+import ManageComponentsListContainer from 'components/structure/ManageComponentsListContainer';
+import ManageComponentContainer from 'components/structure/ManageComponentContainer';
 
 //a IIFE that bootstraps the application and returns an array of routes that are created from the pages array of the users json app config
 
 (function bootstrapApp() {
-  //call the getUserAppConfig and then once it is resolved, bootstrap the application using the data
-  getUserAppConfig().then((data) => {
+  //call the getAppConfigFromFirebase and then once it is resolved, bootstrap the application using the data
+  getAppConfigFromFirebase().then((data) => {
     //set appConfig to the data from the promise
-    const pages = data.appConfig.pagesConfig;
+    const pages = data.pagesConfig;
 
     //create an empty array to hold the routes from the appconfig
     const routes = [];
@@ -39,7 +41,7 @@ import PageContainer from 'components/structure/PageContainer';
     //loop over each pageId and for each of them, find the page object it refers to and add the config of that route to the routes array
     pages.forEach((page) => {
       routes.push(
-        <Route path={page.pathName} component={PageContainer} key={page.id} id={page.id}/>
+        <Route path={page.pathName} component={RouteDisplayContainer} key={page.id} id={page.id}/>
       )
     });
 
@@ -49,6 +51,8 @@ import PageContainer from 'components/structure/PageContainer';
         <Router history={browserHistory} >
           <Route path="/" component={App}>
             {routes}
+            <Route path="manage" component={ManageComponentsListContainer} />
+            <Route path="manage/:id" component={ManageComponentContainer} />
           </Route>
         </Router>
       </Provider>

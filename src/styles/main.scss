@@ -6,3 +6,89 @@
 @import './components/components';
 @import './modules/modules';
 @import './pages/pages';
+
+label {
+  display: block;
+  margin-top: 12px;
+}
+
+.c-label {
+  display: block;
+}
+
+.c-input {
+  @extend %typo-body-1;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  display: block;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 48px;
+}
+
+.c-input__border {
+  position:relative;
+  display:block;
+  width: 100%;
+}
+.c-input__border:before, .c-input__border:after     {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: $color-theme-accent;
+  transition: 0.2s ease all;
+}
+
+.c-input__border:before {
+  left: 50%;
+}
+.c-input__border:after {
+  right: 50%;
+}
+
+/* active state */
+.c-input:focus ~ .c-input__border:before, .c-input:focus ~ .c-input__border:after {
+  width:50%;
+}
+
+.c-textarea {
+  @extend %typo-body-1;
+  box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+  display: block;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+.c-textarea__border {
+  position:relative;
+  display:block;
+  width: 100%;
+}
+.c-textarea__border:before, .c-textarea__border:after     {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: $color-theme-accent;
+  transition: 0.2s ease all;
+}
+
+.c-textarea__border:before {
+  left: 50%;
+}
+.c-textarea__border:after {
+  right: 50%;
+}
+
+/* active state */
+.c-textarea:focus ~ .c-textarea__border:before, .c-textarea:focus ~ .c-textarea__border:after {
+  width:50%;
+}

@@ -45,7 +45,7 @@ export function renderCardActions(content) {
 export function renderCardImage(content) {
   if(content && content.hasOwnProperty("image")) {
     return (
-      <img className="m-card__image" src={content.image} alt="Background for card" />
+      <img className="m-card__image" src={content.image.src} alt={content.image.alt} />
     )
   }
 }
