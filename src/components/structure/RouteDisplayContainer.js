@@ -28,8 +28,11 @@ class RouteDisplayContainer extends Component {
       //find the page object to render
       const pageToRender = pages[pageKeyToRender];
 
+      const componentKeys = Object.keys(pageToRender.components);
       //map over the components array in the pageToRender object to construct the required component
-      return pageToRender.components.map((component, index) => {
+      return componentKeys.map((componentKey, index) => {
+        const component = pageToRender.components[componentKey];
+        
         return constructDisplayComponent(component, index);
       });
     }

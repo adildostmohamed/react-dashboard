@@ -24,7 +24,7 @@ class ContentCard extends Component {
       </div>
     );
     return (
-      <div className="col-sm-6 col-md-4 m-card__wrapper">
+      <div className="col-sm-6 col-md-3 m-card__wrapper">
           { content.title ? contentCard : 'Loading' }
       </div>
     )

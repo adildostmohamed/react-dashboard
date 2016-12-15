@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import base from 'config/rebase';
 
-import Iframe from 'components/iframes/Iframe';
+import ScrollableList from 'components/lists/ScrollableList';
 
-class IframeContainer extends Component {
+export default class ScrollableListContainer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      iframe: {}
+      list: {}
     }
   }
   componentDidMount(){
-    this.firebaseRef = base.syncState(`componentsData/${this.props.config.dataId}`,{
+    this.firebaseRef = base.syncState(`componentsData/${this.props.config.dataId}`, {
       context: this,
-      state: 'iframe'
+      state: 'list'
     });
   }
   componentWillUnmount() {
@@ -22,9 +22,7 @@ class IframeContainer extends Component {
   }
   render() {
     return (
-      <Iframe content={this.state.iframe} />
+      <ScrollableList content={this.state.list} />
     )
   }
 }
-
-export default IframeContainer;

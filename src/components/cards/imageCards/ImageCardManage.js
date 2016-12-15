@@ -11,13 +11,17 @@ class ImageCardManage extends Component {
     event.preventDefault();
 
     const updatedImageCard = {
+      id: this.props.content.id,
       title: this.title.value,
       subtitle: this.subtitle.value,
       body: this.body.value,
       image: {
         src: this.imageSrc.value,
         alt: this.imageAlt.value
-      }
+      },
+      actions: [
+        { label: this.action1Label.value, target: this.action1Target.value }
+      ]
     }
 
     this.props.updateImageCard(updatedImageCard);
@@ -44,12 +48,22 @@ class ImageCardManage extends Component {
           </div>
           <div>
             <label htmlFor="imageSrc" className="c-label">Image source</label>
-            <input id="imageSrc" className="c-input" defaultValue={this.props.content.image.src} type="url" ref={ (input => this.imageSrc = input) } />
+            <input id="imageSrc" className="c-input" defaultValue={this.props.content.hasOwnProperty("image") ? this.props.content.image.src : null} type="url" ref={ (input => this.imageSrc = input) } />
             <span className="c-input__border"></span>
           </div>
           <div>
             <label htmlFor="imageAlt" className="c-label">Image alt tag</label>
-            <input id="imageAlt" className="c-input" defaultValue={this.props.content.image.alt} type="text" ref={ (input => this.imageAlt = input) } />
+            <input id="imageAlt" className="c-input" defaultValue={this.props.content.hasOwnProperty("image") ? this.props.content.image.alt : null} type="text" ref={ (input => this.imageAlt = input) } />
+            <span className="c-input__border"></span>
+          </div>
+          <div>
+            <label htmlFor="action1Label" className="c-label">Action 1 Label</label>
+            <input id="action1Label" className="c-input" defaultValue={this.props.content.actions && this.props.content.actions[0].hasOwnProperty("label") ? this.props.content.actions[0].label : null} type="text" ref={ (input => this.action1Label = input) } />
+            <span className="c-input__border"></span>
+          </div>
+          <div>
+            <label htmlFor="action1Target" className="c-label">Action 1 Target</label>
+            <input id="action1Target" className="c-input" defaultValue={this.props.content.actions && this.props.content.actions[0].hasOwnProperty("target") ? this.props.content.actions[0].target : null} type="url" ref={ (input => this.action1Target = input) } />
             <span className="c-input__border"></span>
           </div>
           <button className="c-btn-primary" type="submit">Update</button>

@@ -11,6 +11,7 @@ class ContentCardManage extends Component {
     event.preventDefault();
 
     const updatedContentCard = {
+      id: this.props.content.id,
       title: this.title.value,
       subtitle: this.subtitle.value,
       body: this.body.value,
@@ -43,15 +44,15 @@ class ContentCardManage extends Component {
           </div>
           <div>
             <label htmlFor="action1Label" className="c-label">Action 1 Label</label>
-            <input id="action1Label" className="c-input" defaultValue={this.props.content.actions[0].label} type="text" ref={ (input => this.action1Label = input) } />
+            <input id="action1Label" className="c-input" defaultValue={this.props.content.actions && this.props.content.actions[0].hasOwnProperty("label") ? this.props.content.actions[0].label : null} type="text" ref={ (input => this.action1Label = input) } />
             <span className="c-input__border"></span>
           </div>
           <div>
             <label htmlFor="action1Target" className="c-label">Action 1 Target</label>
-            <input id="action1Target" className="c-input" defaultValue={this.props.content.actions[0].target} type="url" ref={ (input => this.action1Target = input) } />
+            <input id="action1Target" className="c-input" defaultValue={this.props.content.actions && this.props.content.actions[0].hasOwnProperty("target") ? this.props.content.actions[0].target : null} type="url" ref={ (input => this.action1Target = input) } />
             <span className="c-input__border"></span>
           </div>
-          <button type="submit">Update</button>
+          <button className="c-btn-primary" type="submit">Update</button>
         </form>
       )
     }

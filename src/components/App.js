@@ -18,7 +18,6 @@ class App extends Component {
       <div>
         <header className="m-header">
           <div role="banner" className="m-banner">
-            Hello world
           </div>
           <Navigation appConfig={this.props.appConfig}/>
         </header>
