@@ -14,3 +14,17 @@
     background-color: $color-theme-primary;
   }
 }
+
+%m-map__marker-icon {
+  font-size: 3rem;
+}
+
+.m-map__marker-icon--layer-1 {
+  @extend %m-map__marker-icon;
+  color: unquote("rgba(#{$palette-red-500}, 1.00)");
+}
+
+.m-map__marker-icon--layer-2 {
+  @extend %m-map__marker-icon;
+  color: unquote("rgba(#{$palette-teal-500}, 1.00)");
+}

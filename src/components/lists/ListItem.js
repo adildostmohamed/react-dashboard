@@ -5,8 +5,9 @@ export default class ListItem extends Component {
     super(props);
 
     this.renderListItemName = this.renderListItemName.bind(this);
-    this.renderListItemDesc = this.renderListItemDesc.bind(this);
+    this.renderListItemBody = this.renderListItemBody.bind(this);
     this.renderListItem = this.renderListItem.bind(this);
+    this.renderListItemImage = this.renderListItemImage.bind(this);
     this.handleListItemClick = this.handleListItemClick.bind(this);
   }
 
@@ -20,18 +21,25 @@ export default class ListItem extends Component {
   renderListItemName() {
     if(this.props.item && this.props.item.hasOwnProperty("title")){
       return (
-        <p className="m-list-item__name">{this.props.item.title}</p>
+        <p className="m-list-item__title">{this.props.item.title}</p>
       )
     };
     return null;
   }
-  renderListItemDesc() {
+  renderListItemBody() {
     if(this.props.item && this.props.item.hasOwnProperty("body")){
       return (
-        <p className="m-list-item__desc">{this.props.item.body}</p>
+        <p className="m-list-item__body">{this.props.item.body}</p>
       )
     };
     return null;
+  }
+  renderListItemImage() {
+    if(this.props.item && this.props.item.hasOwnProperty("image")) {
+      return (
+        <img className="m-list-item__image" src={this.props.item.image.src} alt={this.props.item.image.alt} />
+      )
+    }
   }
   //render the list item markup depending on whether the item has a link property or not
   renderListItem() {
@@ -40,18 +48,20 @@ export default class ListItem extends Component {
           <span className="m-list-item__content-wrapper">
             <a className="m-list-item__link" href={this.props.item.target}
               onClick={ (event) => this.handleListItemClick(event) }>
+              { this.renderListItemImage() }
               { this.renderListItemName() }
-              { this.renderListItemDesc() }
+              { this.renderListItemBody() }
             </a>
-            <hr  className="m-list-item__divider" />
+            <hr className="m-list-item__divider" />
           </span>
       )
     } else {
       return (
         <span className="m-list-item__content-wrapper">
+          { this.renderListItemImage() }
           { this.renderListItemName() }
-          { this.renderListItemDesc() }
-          <hr  className="m-list-item__divider" />
+          { this.renderListItemBody() }
+          <hr className="m-list-item__divider" />
         </span>
       )
     }

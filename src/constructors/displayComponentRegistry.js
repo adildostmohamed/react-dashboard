@@ -4,7 +4,7 @@ import ImageCardContainer from 'components/cards/imageCards/ImageCardContainer';
 import IframeContainer from 'components/iframes/IframeContainer';
 import ScrollableListContainer from 'components/lists/ScrollableListContainer';
 import SparklineCardContainer from 'components/cards/sparklinesCards/SparklineCardContainer';
-import GoogleMapsContainer from 'components/maps/GoogleMapsContainer';
+import MapContainer from 'components/maps/MapContainer';
 //for each component that has been created, map the appropriate component/container name to the list of component names that will be retrieved in the app config json for the user
 const displayComponentRegistry = {
   ContentCard: ContentCardContainer,
@@ -12,7 +12,7 @@ const displayComponentRegistry = {
   Iframe: IframeContainer,
   ScrollableList: ScrollableListContainer,
   SparklineCard: SparklineCardContainer,
-  GoogleMap: GoogleMapsContainer
+  GoogleMap: MapContainer
 };
 
 export default displayComponentRegistry;

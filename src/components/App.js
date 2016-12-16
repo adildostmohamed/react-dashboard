@@ -4,16 +4,12 @@ import * as actions from 'actions/index';
 import {} from 'styles/main.scss';
 
 import Navigation from 'components/structure/Navigation';
-import Login from 'components/auth/Login';
 
 class App extends Component {
   componentDidMount() {
     this.props.getAppConfig();
   }
   render() {
-    // if(Object.keys(this.props.user).length === 0) {
-    //   return <Login />
-    // }
     return (
       <div>
         <header className="m-header">

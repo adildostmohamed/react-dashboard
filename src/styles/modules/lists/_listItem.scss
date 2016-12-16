@@ -13,6 +13,7 @@
 .m-list-item__link {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   width: 100%;
   padding: 0 12px;
   transition: all 0.3s;
@@ -23,18 +24,15 @@
   }
 }
 
-
-.m-list-item__name {
+.m-list-item__title {
   @extend %typo-subhead-2;
   margin: 12px 0 6px 0;
-  flex: 1 1 100%;
   color: $color-text-dark;
 }
 
-.m-list-item__desc {
+.m-list-item__body {
   @extend %typo-body-1;
   margin-bottom: 16px;
-  flex: 1 1 100%;
   color: $color-text-light;
 }
 
@@ -43,4 +41,9 @@
   align-self: flex-end;
   width: 100%;
   border-top: 1px solid rgba(0,0,0, 0.05);
+}
+
+.m-list-item__image {
+  height: auto;
+  max-width: 33%;
 }

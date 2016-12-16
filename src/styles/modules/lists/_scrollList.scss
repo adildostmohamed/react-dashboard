@@ -2,6 +2,7 @@
   padding: 0;
   background-color: white;
   @include shadow-2dp();
+  max-height: 500px;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
 }
