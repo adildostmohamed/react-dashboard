@@ -19,13 +19,17 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 //import firebase call to return app config
-import { getAppConfigFromFirebase } from 'mocks/AppConfig';
+import { getAppConfigFromFirebase } from 'actions/index';
 
 //import app components required for rendering
 import App from 'components/App';
+import SignIn from 'components/auth/SignIn';
+import SignUp from 'components/auth/SignUp';
+import RequireAuth from 'components/auth/RequireAuth'
 import RouteDisplayContainer from 'components/structure/RouteDisplayContainer';
 import ManageComponentsListContainer from 'components/structure/ManageComponentsListContainer';
 import ManageComponentContainer from 'components/structure/ManageComponentContainer';
+
 
 //a IIFE that bootstraps the application and returns an array of routes that are created from the pages array of the users json app config
 
@@ -49,7 +53,9 @@ import ManageComponentContainer from 'components/structure/ManageComponentContai
     const routesToBootstrap = (
       <Provider store={store}>
         <Router history={browserHistory} >
-          <Route component={App}>
+          <Route path="signin" component={SignIn} />
+          <Route path="signup" component={SignUp} />
+          <Route component={RequireAuth(App)}>
             {routes}
             <Route path="manage" component={ManageComponentsListContainer} />
             <Route path="manage/:id" component={ManageComponentContainer} />

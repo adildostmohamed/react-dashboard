@@ -1,0 +1,19 @@
+.m-iframe {
+  width: 100%;
+  @include shadow-2dp();
+  background-color: white;
+  border-radius: 3px;
+  margin-bottom: 24px;
+}
+
+.m-iframe__title-wrapper {
+  background-color: white;
+  padding: 12px 12px;
+  @include shadow-2dp();
+}
+
+.m-iframe__title {
+  @extend %typo-headline;
+  color: $color-text-dark;
+  margin: 0;
+}

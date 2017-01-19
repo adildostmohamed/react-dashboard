@@ -1,0 +1,311 @@
+.c-form__notification--error {
+  background-color: $color-error;
+  @extend %typo-subhead-2;
+  color: white;
+  padding: 12px;
+}
+
+fieldset {
+  border: none;
+}
+
+%legend {
+  @extend %typo-display-1;
+  border: none;
+  margin-bottom: 6px;
+}
+
+.legend {
+  @extend %legend;
+}
+
+.legend--light {
+  @extend %legend;
+  color: white;
+}
+
+//=======================
+// Fields
+//=======================
+
+.c-field__wrapper, .c-field__wrapper--error {
+  position: relative;
+}
+
+.c-field__error-text {
+  @extend %typo-body-2;
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 12px;
+  color: $color-error;
+}
+
+.c-field__wrapper--error {
+  .c-input, .c-input--light {
+    border-bottom: 1px solid $color-error;
+    &:hover {
+      border-bottom: 1px solid $color-error;
+    }
+    &:focus {
+      border-bottom: 1px solid transparent;
+    }
+  }
+}
+
+//=======================
+// label
+//=======================
+label {
+  display: block;
+  margin: 18px 0 0 0;
+}
+
+%c-label {
+  display: block;
+  margin: 18px 0 0 0;
+}
+.c-label {
+  @extend %c-label;
+}
+
+.c-label--light {
+  @extend %c-label;
+  color: white;
+}
+
+//========================
+//text input
+//========================
+
+%c-input {
+  @extend %typo-body-1;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 36px;
+  transition: 0.2s ease all;
+}
+
+.c-input {
+  @extend %c-input;
+  border-bottom: 1px solid rgba(black, 0.1);
+  &:hover {
+    border-bottom: 1px solid rgba(black, 0.25);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.c-input--light {
+  @extend %c-input;
+  color: white;
+  border-bottom: 1px solid rgba(white, 0.5);
+  &:hover {
+    border-bottom: 1px solid rgba(white, 1);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+%c-input__border {
+  position:relative;
+  display:block;
+  width: 100%;
+}
+
+%c-input__border:before {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  transition: 0.2s ease all;
+  left: 50%;
+}
+
+%c-input__border:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  transition: 0.2s ease all;
+  right: 50%;
+}
+
+.c-input__border {
+  @extend %c-input__border;
+}
+
+.c-input__border:before {
+  @extend %c-input__border:before;
+  background: $color-theme-accent;
+}
+
+.c-input__border:after {
+  @extend %c-input__border:after;
+  background: $color-theme-accent;
+}
+
+.c-input__border--light {
+  @extend %c-input__border;
+}
+
+.c-input__border--light:before {
+  @extend %c-input__border:before;
+  background: $color-theme-accent;
+}
+
+.c-input__border--light:after {
+  @extend %c-input__border:after;
+  background: $color-theme-accent;
+}
+
+/* active state */
+.c-input:focus ~ .c-input__border:before, .c-input:focus ~ .c-input__border:after, .c-input--light:focus ~ .c-input__border--light:before, .c-input--light:focus ~ .c-input__border--light:after {
+  width:50%;
+}
+
+//==========================
+//textarea
+//==========================
+
+%c-textarea {
+  @extend %typo-body-1;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  width: 100%;
+  transition: 0.2s ease all;
+}
+
+.c-textarea {
+  @extend %c-textarea;
+  border-bottom: 1px solid rgba(black, 0.1);
+  &:hover {
+    border-bottom: 1px solid rgba(black, 0.25);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+.c-textarea--light {
+  @extend %c-textarea;
+  color: white;
+  border-bottom: 1px solid rgba(white, 0.5);
+  &:hover {
+    border-bottom: 1px solid rgba(white, 1);
+  }
+  &:focus {
+    border-bottom: 1px solid transparent;
+  }
+}
+
+%c-textarea__border {
+  position:relative;
+  display:block;
+  width: 100%;
+}
+
+%c-textarea__border:before {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  transition: 0.2s ease all;
+  left: 50%;
+}
+
+%c-textarea__border:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  transition: 0.2s ease all;
+  right: 50%;
+}
+
+.c-textarea__border {
+  @extend %c-textarea__border;
+}
+
+.c-textarea__border:before {
+  @extend %c-textarea__border:before;
+  background: $color-theme-accent;
+}
+
+.c-textarea__border:after {
+  @extend %c-textarea__border:after;
+  background: $color-theme-accent;
+}
+
+.c-textarea__border--light {
+  @extend %c-textarea__border;
+}
+
+.c-textarea__border--light:before {
+  @extend %c-textarea__border:before;
+  background: $color-theme-accent;
+}
+
+.c-textarea__border--light:after {
+  @extend %c-textarea__border:after;
+  background: $color-theme-accent;
+}
+
+/* active state */
+.c-textarea:focus ~ .c-textarea__border:before, .c-textarea:focus ~ .c-textarea__border:after, .c-textarea--light:focus ~ .c-textarea__border--light:before, .c-textarea--light:focus ~ .c-textarea__border--light:after {
+  width:50%;
+}
+
+%c-textarea__border {
+  position:relative;
+  display:block;
+  width: 100%;
+}
+
+.c-textarea__border {
+  @extend %c-textarea__border;
+}
+.c-textarea__border:before, .c-textarea__border:after     {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: $color-theme-accent;
+  transition: 0.2s ease all;
+}
+
+.c-textarea__border:before {
+  left: 50%;
+}
+.c-textarea__border:after {
+  right: 50%;
+}
+
+/* active state */
+.c-textarea:focus ~ .c-textarea__border:before, .c-textarea:focus ~ .c-textarea__border:after {
+  width:50%;
+}
+
+
+//=========================
+// buttons
+//=========================
+
+.c-btn-primary {
+  @extend %typo-button;
+  margin-top: 24px;
+  background-color: $color-theme-accent;
+  padding: 10px 18px;
+  outline: none;
+  border: none;
+  transition: all 0.3s;
+}

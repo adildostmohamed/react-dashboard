@@ -13,7 +13,7 @@ export default class GoogleMapContainer extends Component {
   }
   static defaultProps = {
     center: {lat: 51.5057, lng: -0.0837},
-    zoom: 15
+    zoom: 10
   };
 
   renderMapMarkers() {

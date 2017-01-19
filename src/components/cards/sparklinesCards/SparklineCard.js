@@ -12,8 +12,8 @@ export default class SparklineCard extends Component {
     if(this.props.content && this.props.content.hasOwnProperty("data")) {
       return (
         <Sparklines data={this.props.content.data} limit={10} >
-          <SparklinesLine className="m-card__sparkline"/>
-          <SparklinesReferenceLine type="avg" />
+          <SparklinesLine style={{ strokeWidth: 2, stroke: "rgba(255,152,0, 1.00)", fill: "none" }} />
+          <SparklinesReferenceLine type="avg" style={{ strokeWidth: 1, stroke: "rgba(255,152,0, 1.00)", strokeOpacity: .75, strokeDasharray: '2, 2' }} />
         </Sparklines>
       )
     }
@@ -21,7 +21,7 @@ export default class SparklineCard extends Component {
   render() {
     const { content } = this.props;
     const sparklineCard = (
-      <div className="m-card">
+      <div className="m-card m-card--dark">
         <div className="m-card__content-wrapper">
           <div className="m-card__title-wrapper">
             { renderCardTitle(content) }

@@ -14,7 +14,8 @@ export default class ListItem extends Component {
   //a helper function to check if the list item was passed in a function to run when clicked as a a prop, if so it will call that function and pass back the item to the function
   handleListItemClick(event) {
     if(this.props.hasOwnProperty("handleClick")){
-      this.props.handleClick(event, this.props.item)
+      this.props.handleClick(event, this.props.item);
+
     };
   }
 

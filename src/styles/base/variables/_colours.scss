@@ -5,3 +5,5 @@ $color-text-links: $color-theme-accent;
 $color-text-dark: rgba(0,0,0,1);
 $color-text-normal: unquote("rgba(#{$color-black}, 0.87)") !default;
 $color-text-light: rgba(0,0,0,.54);
+
+$color-error: unquote("rgba(#{$palette-red-600}, 1.00)");

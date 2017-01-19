@@ -90,7 +90,8 @@ module.exports = {
       'styles': path.resolve(__dirname, '../src/styles'),
       'config': path.resolve(__dirname, '../src/config'),
       'constructors': path.resolve(__dirname, '../src/constructors'),
-      'mocks': path.resolve(__dirname, '../src/mocks')
+      'mocks': path.resolve(__dirname, '../src/mocks'),
+      'images': path.resolve(__dirname, '../src/assets/images')
     }
   },
 

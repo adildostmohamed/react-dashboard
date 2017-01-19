@@ -21,8 +21,7 @@ class ManageComponentsListContainer extends Component {
         <li className="m-list-item" key={componentKey}>
           <span className="m-list-item__content-wrapper">
             <Link to={`/manage/${component.id}`} className="m-list-item__link">
-              <p className="m-list-item__name">{component.type}</p>
-              <p className="m-list-item__desc">{component.dataSrc}</p>
+              <p className="m-list-item__title">{component.type}</p>
             </Link>
             <hr className="m-list-item__divider" />
           </span>

@@ -12,6 +12,7 @@ class IframeManage extends Component {
 
     const updatedIframe = {
       id: this.props.content.id,
+      title: this.title.value,
       src: this.src.value,
       size: this.size.value
     }
@@ -23,6 +24,11 @@ class IframeManage extends Component {
     if(Object.keys(this.props.content).length !== 0) {
       return (
         <form ref={ (input) => this.manageIframeForm = input } onSubmit={this.handleSubmit}>
+          <div>
+            <label htmlFor="title" className="c-label">Title</label>
+            <input id="title" className="c-input" defaultValue={this.props.content.title} type="text" ref={ (input) => this.title = input } />
+            <span className="c-input__border"></span>
+          </div>
           <div>
             <label htmlFor="src" className="c-label">Iframe source</label>
             <input id="src" className="c-input" defaultValue={this.props.content.src} type="text" ref={ (input) => this.src = input } />

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from 'actions/index';
 import base from 'config/rebase';
+import { browserHistory } from 'react-router';
 
 class Login extends Component {
   constructor(props) {
@@ -11,9 +12,17 @@ class Login extends Component {
     this.authHandler = this.authHandler.bind(this);
     this.onLoginRedirect = this.onLoginRedirect.bind(this);
   }
-  // componentDidMount() {
-  //   console.log(this.props.user);
-  // }
+
+  componentDidMount() {
+    console.log('when do i turn up?');
+    console.log(this.props.user);
+  }
+
+  componentWillMount() {
+    console.log('hi');
+    this.props.checkIfLoggedIn();
+  }
+
   authHandler(error, user) {
     if(error) {
       console.log(error);
@@ -27,8 +36,9 @@ class Login extends Component {
       console.log(error);
     }
     if(authData.user){
-      console.log('logged in!');
+      console.log(authData);
       this.props.setLoggedInUser(authData);
+      browserHistory.push('/');
     } else {
       console.log('not logged in!');
       //redirect to google for auth

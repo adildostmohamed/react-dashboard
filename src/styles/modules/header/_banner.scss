@@ -4,6 +4,7 @@
   background-color: $banner-background-color;
   color: $banner-text-color;
   align-items: center;
+  justify-content: space-between;
 }
 
 .m-banner {
@@ -14,4 +15,19 @@
 .m-banner--tall {
   @extend %m-banner;
   height: $header-height--tall;
+}
+
+.m-banner__logo {
+  width: 50px;
+  position: relative;
+  left: 24px;
+}
+
+.m-banner__link {
+  color: $color-theme-accent;
+  position: relative;
+  right: 24px;
+  &:hover, &:focus {
+    color: white;
+  }
 }
