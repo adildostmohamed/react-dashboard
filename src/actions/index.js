@@ -15,7 +15,7 @@ export const AUTH_ERROR = 'AUTH_ERROR';
 export const AUTH_USER = 'AUTH_USER';
 
 //===================================
-//FIREBASE config
+//FIREBASE config and helpers
 //===================================
 
 const config = {
@@ -41,6 +41,25 @@ export function getComponentsConfigFromFirebase() {
     return snapshot.val();
   });
 };
+
+export function getUserProfileFromFirebase(userId) {
+  return database.ref(`/users/${userId}`).once('value')
+    .then(snapshot => {
+      return snapshot.val();
+    })
+    .catch(error => {
+      return error;
+    });
+}
+
+export function updateUserLoggedInStatus(userId, status, date) {
+  database.ref(`/users/${userId}/online`).set(status);
+  database.ref(`/users/${userId}/lastOnline`).set(date);
+}
+
+export function updateUserProfile(userId, userData) {
+  return firebase.database().ref(`users/${userId}`).set({...userData});
+}
 
 //==================================
 //ACTION CREATORS
@@ -80,20 +99,43 @@ export function setComponentsConfig(config) {
   }
 }
 
-export function setLoggedInUser(user) {
-  return {
-    type: SET_LOGGED_IN_USER,
-    payload: user
-  }
-}
+//===============================
+// AUTHENTICATION actions
+//===============================
 
+//========SIGN UP
 //function to sign up a new user with firebase and thunk
 export function signUpUser(credentials) {
   return function(dispatch) {
+    //use the Firebase createUserWithEmailAndPassword method passing in the email and password
     firebase.auth().createUserWithEmailAndPassword(credentials.email, credentials.password)
+      //in the callback create a custom user profile with properties from the credentials form and save it to a location in the users object
       .then(response => {
-        dispatch(authUser());
-        browserHistory.push('/');
+        const user = firebase.auth().currentUser;
+        const uid = user.uid;
+        const currentTime = Date();
+        //construct a userProfile object using some of the properties from the returned user object as well as some additional properties
+        const userProfile = {
+          uid: uid,
+          firstName: credentials.firstName,
+          lastName: credentials.lastName,
+          email: user.email,
+          photoURL: credentials.photoURL,
+          online: true,
+          lastOnline: currentTime
+        }
+        // //create a custom profile for a user using the newly constructed userProfile object above
+        // firebase.database().ref(`users/${uid}`).set({...userProfile});
+        // //
+        updateUserProfile(uid, userProfile);
+        getUserProfileFromFirebase(uid)
+          .then(data => {
+            dispatch(authUser(data));
+            browserHistory.push('/')
+          })
+          .catch(error => {
+            dispatch(authError(error));
+          });
       })
       .catch(error => {
         dispatch(authError(error));
@@ -101,13 +143,22 @@ export function signUpUser(credentials) {
   }
 }
 
+//========SIGN IN
 //function to sign in an existing user
 export function signInUser(credentials) {
   return function(dispatch) {
     firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(response => {
-        dispatch(authUser(response));
-        browserHistory.push('/');
+        const uid = response.uid;
+        updateUserLoggedInStatus(uid, true, Date());
+        getUserProfileFromFirebase(uid)
+          .then(data => {
+            dispatch(authUser(data));
+            browserHistory.push('/')
+          })
+          .catch(error => {
+            dispatch(authError(error));
+          });
       })
       .catch(error => {
         dispatch(authError(error));
@@ -115,12 +166,37 @@ export function signInUser(credentials) {
   }
 }
 
-//function to sign out a user from firebase
-export function signOutUser() {
-  firebase.auth().signOut();
-  browserHistory.push('/signin');
-  return {
-    type: SIGN_OUT_USER
+//========VERIFY ON PAGE REFRESH
+//function to check if the user is currently logged in checking both the application state as well as the localStorage if the user refreshes the page
+export function checkAuthStatus() {
+  return function(dispatch) {
+    //get the current state from the redux store
+    const currentState = store.getState();
+    //create a variable to hold the user property in the user object from state if it exists
+    const currentUserFromState = currentState.auth;
+    //check whether the user currently exists in the application state, and if not proceed to check if it exists in localStorage or return
+    if(!currentUserFromState.authenticated) {
+      // //set a flag to say that the user is not currently found in localStorage
+      // let userInLocalStorage = false;
+      //iterate over the keys in the localStorage object
+      for (let key in localStorage) {
+        //for each key in the object check if the key starts with 'firebase:authUser' which is the value of the item stored in localStorage if they were successfully authenticated from Firebase
+        if(key.startsWith("firebase:authUser")) {
+          //if the key matches, get the value stored for that key and set it equal to a variable, remember to parse it into json because it will come back as a string
+          const currentUserFromLocalStorage = JSON.parse(localStorage.getItem(key));
+          const uid = currentUserFromLocalStorage.uid;
+          getUserProfileFromFirebase(uid)
+            .then(data => {
+              dispatch(authUser(data));
+              browserHistory.push('/')
+            })
+            .catch(error => {
+              dispatch(authError(error));
+            });
+        }
+      }
+    }
+    return;
   }
 }
 
@@ -137,14 +213,7 @@ export function verifyAuth() {
   }
 }
 
-//action to dispatch to authenticate a user if successfully signed in or signed up
-export function authUser(user) {
-  return {
-    type: AUTH_USER,
-    payload: user
-  }
-}
-
+//==========SHARED AUTH ACTIONS
 //action to dispatch if an error is returned when a user tries to sign in or sign up
 export function authError(error) {
   return {
@@ -153,34 +222,29 @@ export function authError(error) {
   }
 }
 
-//function to check if the user is currently logged in checking both the application state as well as the localStorage if the user refreshes the page
-export function checkAuthStatus() {
+//action to dispatch to authenticate a user if successfully signed in or signed up
+export function authUser(user) {
+  return {
+    type: AUTH_USER,
+    payload: user
+  }
+}
+
+
+//SIGN OUT
+//function that updates the user profile when they sign out so that they are marked as offline and updates the lastOnline date and then disptches the sign out action
+export function updateUserOnSignOut(userId) {
   return function(dispatch) {
-    //get the current state from the redux store
-    const currentState = store.getState();
-    //create a variable to hold the user property in the user object from state if it exists
-    const currentUserFromState = currentState.auth;
-    //check whether the user currently exists in the application state, and if not proceed to check if it exists in localStorage or return
-    if(!currentUserFromState.authenticated) {
-      // //set a flag to say that the user is not currently found in localStorage
-      // let userInLocalStorage = false;
-      //iterate over the keys in the localStorage object
-      for (let key in localStorage) {
-        //for each key in the object check if the key starts with 'firebase:authUser' which is the value of the item stored in localStorage if they were successfully authenticated from Firebase
-        if(key.startsWith("firebase:authUser")) {
-          // //set the value of the flag to true
-          // userInLocalStorage = true;
-          //if the key matches, get the value stored for that key and set it equal to a variable, remember to parse it into json because it will come back as a string
-          const currentUserFromLocalStorage = JSON.parse(localStorage.getItem(key));
-          //call the setLoggedInUser action with the value of the user from the localStorage so that the user is also set in the application
-          dispatch(authUser(currentUserFromLocalStorage));
-        }
-      }
-      // //if the flag for finding the user is still set to false then push the browser to the login route to get the user to sign up
-      // if(!userInLocalStorage) {
-      //   browserHistory.push('/login');
-      // }
-    }
-    return;
+    updateUserLoggedInStatus(userId, false, Date());
+    firebase.auth().signOut();
+    browserHistory.push('/signin');
+    return dispatch(signOutUser());
+  }
+}
+
+//function to sign out a user from firebase
+export function signOutUser() {
+  return {
+    type: SIGN_OUT_USER
   }
 }

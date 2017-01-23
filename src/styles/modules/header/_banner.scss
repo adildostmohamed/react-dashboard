@@ -25,9 +25,56 @@
 
 .m-banner__link {
   color: $color-theme-accent;
-  position: relative;
-  right: 24px;
   &:hover, &:focus {
     color: white;
+  }
+}
+
+//avatar and name in banner
+
+.m-banner__avatar-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  right: 24px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.m-banner__avatar-img {
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
+
+.m-banner__avatar-name {
+  @extend %typo-body-2;
+  margin-bottom: 0;
+  margin-right: 6px;
+}
+
+.m-header__dropdown-wrapper {
+  @include shadow-2dp();
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 24px;
+  background-color: white;
+  padding: 6px;
+  border-radius: 2px;
+  width: 180px;
+}
+
+.m-header__dropdown-link {
+  @extend %typo-body-2;
+  padding: 6px;
+  border-radius: 2px;
+  transition: all 0.3s;
+  color: $color-text-links;
+  &:hover, &:focus {
+    background-color: rgba(0,0,0, 0.03);
+    text-decoration: none;
+    color: $color-text-links;
   }
 }

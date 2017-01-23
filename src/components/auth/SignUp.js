@@ -21,7 +21,7 @@ const validate = values => {
   }
 
   if (values.password !== values.passwordConfirmation ) {
-    errors.password = 'Passwords do not match';
+    errors.passwordConfirmation = 'Passwords do not match';
   }
 
   return errors;
@@ -60,6 +60,9 @@ class SignUp extends Component {
                 <fieldset>
                   <legend className="legend--light">Sign up</legend>
                   { this.renderAuthenticationError() }
+                  <Field id="firstName" name="firstName" type="text" component={this.renderField} label="First name" />
+                  <Field id="lastName" name="lastName" type="text" component={this.renderField} label="Second name" />
+                  <Field id="avatar" name="photoURL" type="url" component={this.renderField} label="Avatar" />
                   <Field id="email" name="email" type="text" component={this.renderField} label="Email" />
                   <Field id="password" name="password" type="password" component={this.renderField} label="Password" />
                   <Field id="passwordConfirmation" name="passwordConfirmation" type="password" component={this.renderField} label="Password Confirmation" />
